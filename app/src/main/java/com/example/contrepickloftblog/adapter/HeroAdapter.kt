@@ -54,7 +54,7 @@ class HeroAdapter : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
             txtTitle.text = model.title
 
 
-                //piece of shit because you don`t remember what is 1 or 0
+            //piece of shit because you don`t remember what is 1 or 0
             if (model.attackType == 0) {
                 txtAttackType.text = itemView.context.getString(R.string.attack_type_melee)
             } else {

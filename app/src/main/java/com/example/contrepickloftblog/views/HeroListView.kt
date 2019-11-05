@@ -6,7 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.example.contrepickloftblog.model.Hero
 
 @StateStrategyType(value = AddToEndSingleStrategy::class)
-interface HeroListView: MvpView {
+interface HeroListView : MvpView {
     fun presentHeroes(data: List<Hero>)
     fun presentLoading()
 }
