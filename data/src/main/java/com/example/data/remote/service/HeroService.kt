@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface HeroService {
 
-    @GET
+    @GET("./heroes")
     fun getHeroes(): Deferred<List<HeroApi>>
 
 

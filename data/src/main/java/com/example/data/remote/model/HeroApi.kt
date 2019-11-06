@@ -1,6 +1,8 @@
 package com.example.data.remote.model
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
 
 @Serializable
 data class HeroApi(
@@ -10,4 +12,17 @@ data class HeroApi(
     val primary_attr: String,
     val attack_type: String,
     val roles: List<String>
-)
+) {
+    companion object {
+        @UnstableDefault
+        fun toObject(stringValue: String): HeroApi {
+            return Json.nonstrict.parse(serializer(), stringValue)
+        }
+    }
+}
+
+@UnstableDefault
+fun HeroApi.toJson(): String{
+    return Json.stringify(HeroApi.serializer(),this)
+}
+
