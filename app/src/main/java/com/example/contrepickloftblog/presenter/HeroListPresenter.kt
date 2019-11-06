@@ -2,29 +2,32 @@ package com.example.contrepickloftblog.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.example.contrepickloftblog.model.Hero
 import com.example.contrepickloftblog.views.HeroListView
-import java.util.logging.Handler
-import kotlin.concurrent.thread
+import com.example.domain.repositories.implementations.HeroRepositoryImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @InjectViewState
 class HeroListPresenter : MvpPresenter<HeroListView>() {
-    fun fetchHero() {
+
+    private val heroesRepositoryImpl = HeroRepositoryImpl()
+
+
+    suspend fun fetchHero() {
         viewState.presentLoading()
+        GlobalScope.launch { Dispatchers.IO }
+        try {
+            val heroes = heroesRepositoryImpl.fetchHeroes().await()
 
-        //in this case we can use Rx request in our database
-        val handler = android.os.Handler()
-        thread {
-
-            Thread.sleep(3000)
-            val mokcData = ArrayList<Hero>()
-            mokcData.add(Hero(id = 0, title = "Anti-mage", icon = "", attackType = 0))
-            mokcData.add(Hero(id = 1, title = "Dark Willow", icon = "", attackType = 1))
-            mokcData.add(Hero(id = 2, title = "Lion", icon = "", attackType = 1))
-
-            handler.post {
-                viewState.presentHeroes(data = mokcData)
+            withContext(Dispatchers.Main){
+                viewState.presentHeroes(data = heroes)
             }
+
+
+        }catch (e: Exception){
+            e.printStackTrace()
         }
-     }
+    }
 }

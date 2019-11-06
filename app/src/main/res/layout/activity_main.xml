@@ -6,12 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <fragment
-        android:id="@+id/navHostMain"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerHeroList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:navGraph="@navigation/nav_graph"
-        app:defaultNavHost="true" />
+        android:layout_height="match_parent" />
+
+
+    <TextView
+        android:id="@+id/txt_hero_list_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/state_loading"
+        android:textColor="#000"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerHeroList"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerHeroList"
+        app:layout_constraintStart_toStartOf="@+id/recyclerHeroList"
+        app:layout_constraintTop_toTopOf="@+id/recyclerHeroList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

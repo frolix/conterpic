@@ -3,12 +3,10 @@ package com.example.contrepickloftblog.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contrepickloftblog.R
-import com.example.contrepickloftblog.model.Hero
-import org.w3c.dom.Text
+import com.example.domain.model.Hero
 import java.util.*
 
 class HeroAdapter : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
@@ -31,8 +29,6 @@ class HeroAdapter : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
                 false
             )
         )
-
-
     }
 
     override fun getItemCount(): Int {
@@ -40,21 +36,20 @@ class HeroAdapter : RecyclerView.Adapter<HeroAdapter.ViewHolder>() {
     }
 
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
         viewHolder.bind(model = mHeroList[position])
-    }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val txtTitle: TextView = itemView.findViewById(R.id.txt_hero_title)
         private val txtAttackType: TextView = itemView.findViewById(R.id.txt_attack_type)
-        private val imgAvatar: ImageView = itemView.findViewById(R.id.img_avatar)
+//        private val imgAvatar: ImageView = itemView.findViewById(R.id.img_avatar)
 
         fun bind(model: Hero) {
             txtTitle.text = model.title
 
 
-            //piece of shit because you don`t remember what is 1 or 0
+            //piece of shit because you don`t remember what is 1 or 0 using enum it more good
             if (model.attackType == 0) {
                 txtAttackType.text = itemView.context.getString(R.string.attack_type_melee)
             } else {
